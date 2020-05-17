@@ -11,11 +11,21 @@ import com.pluralsight.repository.RideRepository;
 @Service("rideService")
 public class RideServiceImpl implements RideService {
 
-	@Autowired
 	private RideRepository rideRepository;
-	
+
+	@Autowired
+	public void setRideRepository(RideRepository rideRepository) {
+		this.rideRepository = rideRepository;
+	}
+
 	@Override
 	public List<Ride> getRides() {
 		return rideRepository.getRides();
+	}
+
+	@Override
+	public Ride createRide(Ride ride) {
+		rideRepository.createRide(ride);
+		return ride;
 	}
 }
