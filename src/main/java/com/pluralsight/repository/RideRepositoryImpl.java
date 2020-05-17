@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.pluralsight.repository.util.RideRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -27,13 +28,7 @@ public class RideRepositoryImpl implements RideRepository {
 
 	@Override
 	public List<Ride> getRides() {
-		return jdbcTemplate.query("select * from ride", (resultSet, i) -> {
-			Ride ride = new Ride();
-			ride.setName(resultSet.getString("name "));
-			ride.setDuration(resultSet.getInt("duration"));
-			ride.setId(resultSet.getInt("id"));
-			return ride;
-		});
+		return jdbcTemplate.query("select * from ride", new RideRowMapper());
 	}
 
 	// Demonstrating simpleJdbcInsert

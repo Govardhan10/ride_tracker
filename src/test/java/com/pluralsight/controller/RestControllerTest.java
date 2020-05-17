@@ -36,6 +36,6 @@ public class RestControllerTest {
 		ride.setName("Govardhan");
 		ride.setDuration(100);
 
-		template.put("http://localhost:8080/ride_tracker/ride",ride);
+		template.postForObject("http://localhost:8080/ride_tracker/ride",ride, Ride.class);
 	}
 }
