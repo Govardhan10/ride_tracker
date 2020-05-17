@@ -1,5 +1,7 @@
 package com.pluralsight.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -24,12 +27,13 @@ public class RideRepositoryImpl implements RideRepository {
 
 	@Override
 	public List<Ride> getRides() {
-		Ride ride = new Ride();
-		ride.setName("Corner Canyon");
-		ride.setDuration(120);
-		List <Ride> rides = new ArrayList<>();
-		rides.add(ride);
-		return rides;
+		return jdbcTemplate.query("select * from ride", (resultSet, i) -> {
+			Ride ride = new Ride();
+			ride.setName(resultSet.getString("name "));
+			ride.setDuration(resultSet.getInt("duration"));
+			ride.setId(resultSet.getInt("id"));
+			return ride;
+		});
 	}
 
 	// Demonstrating simpleJdbcInsert
