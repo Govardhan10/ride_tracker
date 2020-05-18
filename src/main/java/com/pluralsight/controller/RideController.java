@@ -43,4 +43,10 @@ public class RideController {
 	public void batchUpdate() {
 		rideService.batchUpdate();
 	}
+
+	@DeleteMapping(value = "/delete/{id}")
+	public @ResponseBody Object deleteRide(@PathVariable(value = "id") Integer id) {
+		rideService.deleteRide(id);
+		return null;
+	}
 }

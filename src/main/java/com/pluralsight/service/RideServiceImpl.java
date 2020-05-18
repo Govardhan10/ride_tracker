@@ -50,4 +50,9 @@ public class RideServiceImpl implements RideService {
         }
 		rideRepository.batchUpdate(pairs);
 	}
+
+    @Override
+    public void deleteRide(Integer id) {
+        rideRepository.deleteRide(id);
+    }
 }
