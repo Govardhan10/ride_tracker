@@ -28,5 +28,19 @@ public class RideController {
 	public @ResponseBody Ride createRide(@RequestBody Ride ride) {
 		return rideService.createRide(ride);
 	}
-	
+
+	@GetMapping(value = "/ride/{id}")
+	public @ResponseBody Ride getRide(@PathVariable(value = "id") Integer id) {
+		return rideService.getRide(id);
+	}
+
+	@PutMapping(value = "/ride")
+	public void updateRide(@RequestBody Ride ride) {
+		rideService.updateRide(ride);
+	}
+
+	@GetMapping(value = "/batch")
+	public void batchUpdate() {
+		rideService.batchUpdate();
+	}
 }
