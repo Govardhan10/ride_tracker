@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.pluralsight.model.Ride;
 import com.pluralsight.repository.RideRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("rideService")
 public class RideServiceImpl implements RideService {
@@ -41,6 +42,7 @@ public class RideServiceImpl implements RideService {
 	}
 
 	@Override
+    @Transactional
 	public void batchUpdate() {
 		List<Ride> rides = getRides();
 		List<Object[]> pairs = new ArrayList<>();
